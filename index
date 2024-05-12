@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website</title>
+    <style>
+        /* CSS Styles */
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+            font-family: gilroy;
+            color: rgb(241, 243, 244);
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        #main {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #page,
+        #page1,
+        #page2,
+        #page3 {
+            position: relative;
+            height: 100vh; /* Adjusted to fill entire viewport */
+            width: 100vw;
+            background-color: #040404;
+        }
+
+        canvas {
+            position: relative;
+            z-index: 9;
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+
+        #loop {
+            display: flex;
+            position: absolute;
+            top: 30%;
+            height: 25%;
+            width: 100%;
+            font-size: 100px;
+            white-space: nowrap;
+            font-family: gilroy;
+        }
+
+        #loop>h1 {
+            font-weight: 400;
+            animation-name: anim;
+            animation-duration: 15s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        #loop>h1>span {
+            -webkit-text-stroke: 1.2px #faf8f8;
+            color: transparent;
+            font-weight: 500;
+        }
+
+        @keyframes anim {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        #nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 7%;
+            width: 100%;
+            position: fixed;
+            z-index: 99;
+            padding: 0px 30px;
+        }
+
+        #nav>h3 {
+            font-weight: 400;
+            font-size: 22px;
+        }
+    
+        #page>h3 {
+            position: absolute;
+            top: 55%;
+            font-weight: 400;
+            color: #7c7c7c;
+            left: 5%;
+        }
+
+        #page>h4 {
+            position: absolute;
+            top: 69%;
+            left: 40%;
+            font-weight: 500;
+        }
+
+        #page1>#right-text {
+            position: absolute;
+            top: 30%;
+            left: 10%;
+        }
+
+        #page1>#right-text>h3 {
+            font-weight: 400;
+            color: #7c7c7c;
+        }
+
+        #page1>#right-text>h1 {
+            line-height: 1.5;
+            font-size: 50px;
+        }
+
+        #page1>#left-text {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            text-align: end;
+        }
+
+        #page1>#left-text>h1 {
+            font-size: 50px;
+            line-height: 1.5;
+        }
+
+        #page1>#left-text>h3 {
+            color: #7c7c7c;
+            font-weight: 400;
+        }
+
+        #page2 {
+            height: 100vh; /* Adjusted to fill entire viewport */
+        }
+
+        #text1 {
+            position: absolute;
+            top: 30%;
+            left: 10%;
+        }
+
+        #text1>h3 {
+            color: #7c7c7c;
+            font-weight: 400;
+        }
+
+        #text1>h1 {
+            font-size: 60px;
+            line-height: 1.5;
+        }
+
+        .contact-me {
+            position: absolute;
+            bottom: 210px; /* Adjusted to move slightly upward */
+            right: 300px;
+            text-align: center;
+            background-color: rgba(74, 67, 67, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .contact-me form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .contact-me form input,
+        .contact-me form textarea {
+            width: 100%;
+            padding: 3px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.5);
+            color: black;
+        }
+
+        .contact-me form button {
+            padding: 10px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+        }
+
+        #text2 {
+            position: absolute;
+            right:-500px;
+            bottom: 40px; /* Adjust the distance from the bottom */
+            transform: translateX(-50%); /* Center it horizontally */
+            text-align: right;
+            width: 90%; /* Adjust the width as needed */
+        }
+
+        #page3>#text3 {
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            text-align: left;
+            margin-left:30px;
+        }
+
+        #page3>#text3>h2 {
+            color: #7b7b7b;
+            font-weight: 400;
+
+        }
+
+        #page3>#text3>h1 {
+            font-size: 70px;
+        }
+
+        #page3>.scrolling-section {
+            position: absolute;
+            top: 70%;
+            right: 0;
+            transform: translate(50%, -50%);
+        }
+
+        .scrolling-section {
+            overflow: hidden;
+            width: 90%;
+            height: 100%; /* Adjust height as needed */
+            position:relative;
+        }
+
+        .scrolling-content {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .item {
+            flex: 0 0 auto;
+            width: 270px; /* Adjust width as needed */
+            height: 200px; /* Adjust height as needed */
+            background-color: #cccccc18;
+            margin-right: 20px; /* Adjust margin as needed */
+            margin-top: 100px;
+            border-radius: 50px;
+            border-style:dotted;
+            position: relative; /* Added position relative */
+        }
+
+        .item img {
+            width: 100%;
+            height: 100%;
+            object-fit:cover; /* Changed object-fit property */
+            border-radius: 50px;
+        }
+
+        /* Added description style */
+        /* CSS Styles */
+        .description {
+            position: absolute;
+            bottom: 0; /* Positioned at the bottom */
+            left: 0; /* Centered horizontally */
+            width: 100%;
+            padding: 10px; /* Added padding */
+            background-color: rgba(10, 10, 10, 0.6); /* Light gray with transparency */
+            text-align: center; /* Centered text */
+            font-size: 18px; /* Adjust font size */
+            color: rgb(237, 236, 236); /* Set text color to black */
+            overflow: hidden; /* Hide overflow */
+        }
+        .floating-links {
+            position: fixed;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            transition: opacity 1s;
+        }
+
+        .floating-links .image-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .floating-links .image-link:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        .floating-links .image-link img {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <h3><b>ATUL</b>RANJAN<b>JHA</b></h3>
+        <a id="button" href="page1.html" style="border-radius: 20px; background-color: white; color: #040404; padding: 4px 10px; text-decoration: none; box-shadow: 0 0 0 4px white, 0 0 0 8px rgba(147, 146, 146, 0.5), inset 0 0 0 4px white;">About Me</a>
+    </div>
+    
+    <div id="main">
+        <div id="page">
+            <div id="loop">
+                <h1><b>WELCOME</b> TO <b><i>MY</i></b> <span>METAVERSE. </span></h1>
+                <h1><b>WELCOME</b> TO <b><i>MY</i></b> <span>METAVERSE. </span></h1>
+                <h1><b>WELCOME</b> TO <b><i>MY</i></b> <span>METAVERSE. </span></h1>
+            </div>
+            <h3>I AM A DATA SCIENCE ENTHUASTIC.<br> THANKS FOR VISITING! LET'S COLLABORATE ON MEANINGFUL PROJECTS.”
+                <br>EXPLORE MY PORTFOLIO AND DISCOVER THE POSSIBILITIES.</h3>
+            <br>
+            <h4>...SCROLL TO READ</h4>
+            <canvas></canvas>
+        </div>
+        <div id="page1">
+            <div id="right-text">
+                <h3>MOTO OF LIFE</h3>
+                <h1>HAVE FUN
+                    <br>
+                    LET'S PLAY
+                    <br>
+                    JUST BE TOGETHER</h1>
+            </div>
+            <div id="left-text">
+                <h1>MAKE A STORY
+                    <br>
+                    TAKE A CHANCE
+                    <br>
+                    BUILD AND OWNED</h1>
+                <h3>..AND MAINTAIN GOOD HUMANITY</h3>
+            </div>
+        </div>
+        <div id="page2">
+            <div id="text1">
+                <h3>CONNECT WITH ME</h3>
+                <h1>LET'S
+                    <br>
+                    HAVE FUN
+                    <br>
+                    TOGETHER</h1>
+            </div>
+            <div class="contact-me">
+                <h2>Connect with me</h2> 
+                <form action="https://formspree.io/f/xzbnkgnn" method="POST">
+                    <label for="name">Your name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Your email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="message">Your message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+            <div id="text2">
+                <p>LET'S HAVE A BLAST! LET'S JUST THROW AWAY AGE, GENDER, REGION, <br> STATUS, ETC., DON'T COMPETE, DON'T FIGHT, COOPERATE AND SHARE <br> WITH EACH OTHER AND ENJOY IT TOGETHER! SO THAT YOU CAN STAND <br> THERE IN THE NOT-TOO-DISTANT FUTURE AND DREAM OF ANOTHER NEW <br> FUTURE</p>
+            </div>
+        </div>
+        <div id="page3">
+            <div id="text3">
+                <h2>PROJECTS</h2>
+                <h1>WELCOME<br>TO MY<br>PLAYGROUND</h1>
+            </div>
+            <!-- Tile Functionality -->
+            <div class="scrolling-section">
+                <div class="scrolling-content">
+                    <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Image-Based%20Number%20Prediction">
+                        <div class="item" title="Description for Tile 1">
+                            <img src="C:\Users\atul\Downloads\7-Roulette-Number-Prediction-Methods-Deciphered.webp" alt="Image 1">
+                            <div class="description">Number Prediction</div> <!-- Added description -->
+                        </div>
+                    </a>
+                    <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Boston_Housing_price_prediction">
+                        <div class="item" title="Description for Tile 2">
+                            <img src="C:\Users\atul\Downloads\148332938-4e66d4ca-2d16-474f-8482-340aef6a48d0.png" alt="Image 2">
+                            <div class="description">House Prize Prediction</div> <!-- Added description -->
+                        </div>
+                    </a>
+                    <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Breast%20cancer">
+                        <div class="item" title="fffff">
+                            <img src="C:\Users\atul\Downloads\download (3).jpeg" alt="Breast Cancer Prediction">
+                            <div class="description">Breast Cancer Detection</div> <!-- Added description -->
+                        </div>
+                    </a>
+                    <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/ipl_prediction">
+                        <div class="item" title="ffffffff">
+                            <img src="C:\Users\atul\Downloads\og_image.jpeg" alt="IPL Prediction">
+                            <div class="description">IPL Prediction</div> <!-- Added description -->
+                        </div>
+                    </a>
+                    <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Movie_Recommender">
+                        <div class="item" title="Description for Tile 5">
+                            <img src="C:\Users\atul\Downloads\download (2).jpeg" alt="Movie Recommender">
+                            <div class="description">Movie Recommender</div> <!-- Added description -->
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- End of Tile Functionality -->
+        </div>
+    </div>
+    <div class="floating-links" id="floating-links">
+        <div class="image-link">
+            <a href="https://github.com/AtulRanjanJha">
+                <img src="download (4).png" alt="Github" width="100" height="132">
+            </a>
+        </div>
+        <div class="image-link">
+            <a href="https://www.linkedin.com/in/atul-jha-743098228/">
+                <img src="hg.png" alt="linkedin">
+            </a>
+        </div>
+        <div class="image-link">
+            <a href="https://twitter.com/atuljha4747">
+                <img src="hj.png" alt="twitter">
+            </a>
+        </div>
+    </div>    
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js" integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js" integrity="sha512-AMl4wfwAmDM1lsQvVBBRHYENn1FR8cfOTpt8QVbb/P55mYOdahHD4LmHM1W55pNe3j/3od8ELzPf/8eNkkjISQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function locomotive() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const locoScroll = new LocomotiveScroll({
+                el: document.querySelector("#main"),
+                smooth: true,
+            });
+            locoScroll.on("scroll", ScrollTrigger.update);
+
+            ScrollTrigger.scrollerProxy("#main", {
+                scrollTop(value) {
+                    return arguments.length
+                        ? locoScroll.scrollTo(value, 0, 0)
+                        : locoScroll.scroll.instance.scroll.y;
+                },
+
+                getBoundingClientRect() {
+                    return {
+                        top: 0,
+                        left: 0,
+                        width: window.innerWidth,
+                        height: window.innerHeight,
+                    };
+                },
+
+                pinType: document.querySelector("#main").style.transform
+                    ? "transform"
+                    : "fixed",
+            });
+            ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+            ScrollTrigger.refresh();
+        }
+        locomotive();
+
+
+        const canvas = document.querySelector("canvas");
+        const context = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+
+        window.addEventListener("resize", function () {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            render();
+        });
+
+        gsap.to(imageSeq, {
+            frame: frameCount - 1,
+            snap: "frame",
+            ease: `none`,
+            scrollTrigger: {
+                scrub: 1, // Adjust scrub value for smoother animation
+                trigger: `#page2`, // Set trigger to #page3
+                start: "bottom bottom", // Trigger animation when the bottom of page3 is at the center of the viewport
+                end: "-=100%", // Scroll 50% beyond the end of the trigger
+                scroller: `#main`,
+            },
+            onUpdate: render,
+        });
+     </script>
+     <script>
+        $(document).ready(function() {
+            var scrollingSection = $('.scrolling-section');
+            var scrollingContent = scrollingSection.find('.scrolling-content');
+            var items = scrollingContent.find('.item');
+            var itemWidth = items.first().outerWidth(true);
+            var totalItems = items.length;
+    
+            // Clone the items for seamless loop
+            scrollingContent.append(items.clone());
+    
+            // Initial positioning of tiles
+            scrollingContent.css('transform', 'translateX(-' + (itemWidth * (totalItems - 1)) + 'px');
+    
+            // Function to move the tiles automatically in a loop
+            function moveTiles() {
+                gsap.to(scrollingContent, {
+                    x: '-' + (totalItems * itemWidth) + 'px',
+                    duration: totalItems * 2, // Adjust duration for speed
+                    ease: "none", // Disable easing for seamless loop
+                    onComplete: function() {
+                        gsap.set(scrollingContent, { x: 0 });
+                        moveTiles(); // Restart the loop
+                    }
+                });
+            }
+    
+            // Start the loop
+            moveTiles();
+    
+            // Add tooltip functionality
+            items.each(function() {
+                $(this).hover(function() {
+                    var title = $(this).attr('title');
+                    $(this).attr('data-title', title).removeAttr('title');
+                }, function() {
+                    $(this).removeAttr('data-title');
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>
