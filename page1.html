@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atul Jha - Portfolio</title>
+  <style>
+    body {
+      --bg-color: #090909; /* Default background color */
+      --text-color: white; /* Default text color */
+      --icon-color: var(--text-color); /* Default icon color */
+
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden; /* Prevent horizontal scrollbar */
+      font-size: 2.6vw; /* Base font size for all text elements */
+      transition: color 0.5s, background-color 0.5s; /* Smooth transition */
+    }
+    .darkmode {
+      --bg-color: #f7f7f7; /* Background color in dark mode */
+      --text-color: black; /* Text color in dark mode */
+      --icon-color: var(--text-color); /* Icon color in dark mode */
+    }
+    
+
+    /* Container for the content */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 50px 20px;
+      text-align: center;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+    .btn__icon {
+      color: var(--icon-color);
+    }
+    .btn {
+            position: fixed;
+            top: 15px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            border-radius: 190px;
+            padding: 0.5em;
+            background-color: #aaa6a6;
+            color:rgb(178, 180, 138);
+            box-shadow: inset 0 8px 60px rgba(0, 0, 0, .1),
+                        inset 0 8px 8px rgba(0, 0, 0, .1),
+                        inset 0 -4px 4px rgba(0, 0, 0, .1);
+            z-index: 999;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+
+    .btn__indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 40%;
+      position: fixed;
+      margin-left: 4px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, .2);
+      transition: transform .3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+        
+    .btn__icon-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center; /* Horizontally center the icon */
+      align-items: center; /* Vertically center the icon */
+      font-size: 5.5rem;
+
+    }
+
+    .btn__icon {
+      color: var(--icon-color);
+      font-size: 1.5rem;
+    }
+
+    .btn__icon.animated {
+    animation: spin 0.5s;
+    }
+    @keyframes spin {
+      to {
+          transform: rotate(360deg);
+      }
+    }
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+
+    .content-mobile {
+      display: none;
+    }
+
+    .content-desktop {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    /* Keyframes for fade-in animation */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    .resume-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hi, I’m Atul Jha</h1>
+    <h2>Welcome to my Portfolio site</h2>
+    <p>Welcome to my digital playground! 👋 Hello! I’m a B.Tech student with an insatiable curiosity for technology. While my heart beats for artificial intelligence, my interests extend far beyond its algorithms. From coding late into the night to unraveling the mysteries of data structures, I thrive on challenges. Whether it’s building a web app, optimizing an algorithm, or exploring the cosmos of software development, count me in! When I’m not immersed in code, you’ll find me lost in a good book or contemplating the next adventure. Let’s connect and explore the infinite possibilities that lie ahead! 🚀🌟</p>
+  </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+ integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+ crossorigin="anonymous" referrerpolicy="no-referrer"/>
+ <button class="resume-button" onclick="window.open('https://drive.google.com/file/d/1cxLLa89Vl3YxMcLYeIF_voszvB430Z6d/view?usp=drive_link', '_blank')">Resume</button>
+ <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+  <dotlottie-player src="https://lottie.host/35e15e1d-7e97-45dd-adf6-82dfe81e1136/rfmh0i0ScX.json" background="transparent" speed="1" style="width: 600px; height: 300px; margin: 0 auto; display: block;" loop autoplay></dotlottie-player>
+ <!-- Floating navigation bar -->
+  
+  <div class="btn">
+  <div class="btn__indicator">
+  <div class="btn__icon-container">
+     <i class="btn__icon fa-solid"></i>
+  </div>
+  </div>
+  </div>
+    
+  <script>
+  const body = document.querySelector('body');
+  const btn = document.querySelector('.btn');
+  const icon = document.querySelector('.btn__icon');
+    
+  function store(value) {
+  localStorage.setItem('darkmode', value);
+  }
+    
+  function load() {
+  const darkmode = localStorage.getItem('darkmode');
+    
+  if (!darkmode) {
+    store(false);
+    icon.classList.add('fa-sun');
+  } else if (darkmode == 'true') {
+    body.classList.add('darkmode');
+    icon.classList.add('fa-moon');
+  } else if (darkmode == 'false') {
+    icon.classList.add('fa-sun');
+  }
+  }
+    
+  load();
+    
+  btn.addEventListener('click', () => {
+    
+  body.classList.toggle('darkmode');
+  icon.classList.add('animated');
+    
+  store(body.classList.contains('darkmode'));
+    
+  if (body.classList.contains('darkmode')) {
+    icon.classList.remove('fa-sun');
+    icon.classList.add('fa-moon');
+  } else {
+    icon.classList.remove('fa-moon');
+    icon.classList.add('fa-sun');
+  }
+    
+  setTimeout(() => {
+    icon.classList.remove('animated');
+  }, 500)
+  })    
+  
+    // Get all the navigation links
+    var links = document.querySelectorAll('.floating-navbar a');
+
+    // Add click event listeners to each link
+    links.forEach(function(link, index) {
+      link.addEventListener('click', function(event) {
+        // Remove the "active" class from all links
+        links.forEach(function(link) {
+          link.classList.remove('active');
+        });
+
+        // Add the "active" class to the clicked link
+        this.classList.add('active');
+
+        // Store the index of the clicked link in local storage
+        localStorage.setItem('activeIndex', index);
+      });
+    });
+
+    // Check if there is an active index stored in local storage
+    var activeIndex = localStorage.getItem('activeIndex');
+
+    if (activeIndex !== null) {
+      // Add the "active" class to the link corresponding to the stored index
+      links[activeIndex].classList.add('active');
+    }
+  </script>
+</body>
+</html>
