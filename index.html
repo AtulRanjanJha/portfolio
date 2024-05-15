@@ -575,5 +575,27 @@
         // Observe the target elements
         observer.observe(document.getElementById("page1"));
     </script>
+    <script>
+        window.addEventListener('scroll', function() {
+            let links = document.querySelectorAll('.image-link');
+            let projectsHeading = document.querySelector('.projects-heading');
+
+            links.forEach(function(link) {
+                if (isElementInView(page1, link)) {
+                    link.style.opacity = '0'; // Fade out the links
+                } else {
+                    link.style.opacity = '1'; // Fade in the links
+                }
+            });
+        });
+
+        function isElementInView(element, container) {
+            let bounding = element.getBoundingClientRect();
+            let containerBounding = container.getBoundingClientRect();
+
+            // Check if the bottom of the element is above the container's top
+            return bounding.bottom < containerBounding.top;
+        }
+    </script>
 </body>
 </html>
