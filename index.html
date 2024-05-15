@@ -299,6 +299,10 @@
             height: 50px;
             border-radius: 25px;
         }
+        .reveal-letter {
+            opacity: 0;
+            transition: opacity 0.5s ease; /* Add transition effect */
+        }
 
     </style>
 </head>
@@ -532,6 +536,44 @@
             });
         });
     </script>
-    
+    <script>
+        // Function to handle intersection changes
+        function handleIntersect(entries, observer) {
+            entries.forEach(entry => {
+                // If page1 is intersecting
+                if (entry.target.id === "page1") {
+                    // Get all h1 and h3 elements
+                    const headings = document.querySelectorAll("#right-text h3, #left-text h1, #right-text h1, #left-text h3");
+                    
+                    // If the page1 section is not visible
+                    if (!entry.isIntersecting) {
+                        // Hide elements one by one
+                        headings.forEach((heading, index) => {
+                            setTimeout(() => {
+                                heading.style.opacity = 0;
+                            }, index * 100); // Adjust the delay for each heading
+                        });
+                    } else {
+                        // Show elements one by one
+                        headings.forEach((heading, index) => {
+                            setTimeout(() => {
+                                heading.style.opacity = 1;
+                            }, index * 100); // Adjust the delay for each heading
+                        });
+                    }
+                }
+            });
+        }
+
+        // Create an intersection observer instance
+        const observer = new IntersectionObserver(handleIntersect, {
+            root: null, // Viewport as root
+            rootMargin: '0px', // No margin
+            threshold: 0.5 // 50% of the element visible
+        });
+
+        // Observe the target elements
+        observer.observe(document.getElementById("page1"));
+    </script>
 </body>
 </html>
