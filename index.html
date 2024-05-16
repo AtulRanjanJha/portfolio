@@ -205,77 +205,6 @@
             width: 90%; /* Adjust the width as needed */
         }
 
-        #page3>#text3 {
-            position: absolute;
-            top: 50%;
-            left: 30%;
-            transform: translate(-50%, -50%);
-            text-align: left;
-            margin-left:30px;
-        }
-
-        #page3>#text3>h2 {
-            color: #7b7b7b;
-            font-weight: 400;
-
-        }
-
-        #page3>#text3>h1 {
-            font-size: 70px;
-        }
-
-        #page3>.scrolling-section {
-            position: absolute;
-            top: 70%;
-            right: 0;
-            transform: translate(50%, -50%);
-        }
-
-        .scrolling-section {
-            overflow: hidden;
-            width: 90%;
-            height: 100%; /* Adjust height as needed */
-            position:relative;
-        }
-
-        .scrolling-content {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .item {
-            flex: 0 0 auto;
-            width: 270px; /* Adjust width as needed */
-            height: 200px; /* Adjust height as needed */
-            background-color: #cccccc18;
-            margin-right: 20px; /* Adjust margin as needed */
-            margin-top: 100px;
-            border-radius: 50px;
-            border-style:ridge;
-            position: relative; /* Added position relative */
-        }
-
-        .item img {
-            width: 100%;
-            height: 100%;
-            object-fit:cover; /* Changed object-fit property */
-            border-radius: 50px;
-        }
-
-        /* Added description style */
-        /* CSS Styles */
-        .description {
-            position: absolute;
-            bottom: 0; /* Positioned at the bottom */
-            left: 0; /* Centered horizontally */
-            width: 100%;
-            padding: 10px; /* Added padding */
-            background-color: rgba(7, 7, 7, 0.6); /* Light gray with transparency */
-            text-align: center; /* Centered text */
-            font-size: 18px; /* Adjust font size */
-            color: rgb(237, 236, 236); /* Set text color to black */
-            overflow: hidden; /* Hide overflow */
-        }
         .floating-links {
             position: fixed;
             top: 50%;
@@ -309,6 +238,7 @@
 <body>
     <div id="nav">
         <h3><b>ATUL</b>RANJAN<b>JHA</b></h3>
+        <a href="new.html" style="color: #f6f0f0; font-size:20px; text-decoration:none;">MY WORKSPACE</a>
         <a id="button" href="page1.html" style="border-radius: 20px; background-color: white; color: #040404; padding: 4px 10px; text-decoration: none; box-shadow: 0 0 0 4px white, 0 0 0 8px rgba(147, 146, 146, 0.5), inset 0 0 0 4px white;">About Me</a>
     </div>
     
@@ -367,48 +297,6 @@
             <div id="text2">
                 <p>LET'S HAVE A BLAST! LET'S JUST THROW AWAY AGE, GENDER, REGION, <br> STATUS, ETC., DON'T COMPETE, DON'T FIGHT, COOPERATE AND SHARE <br> WITH EACH OTHER AND ENJOY IT TOGETHER! SO THAT YOU CAN STAND <br> THERE IN THE NOT-TOO-DISTANT FUTURE AND DREAM OF ANOTHER NEW <br> FUTURE</p>
             </div>
-        </div>
-        <div id="page3">
-            <div id="text3">
-                <h2>PROJECTS</h2>
-                <h1>WELCOME<br>TO MY<br>PLAYGROUND</h1>
-            </div>
-            <!-- Tile Functionality -->
-            <div class="scrolling-section">
-                <div class="scrolling-content">
-                    <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Image-Based%20Number%20Prediction">
-                        <div class="item" title="Description for Tile 1">
-                            <img src="7-Roulette-Number-Prediction-Methods-Deciphered.webp" alt="Image 1">
-                            <div class="description">Number Prediction</div> <!-- Added description -->
-                        </div>
-                    </a>
-                    <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Boston_Housing_price_prediction">
-                        <div class="item" title="Description for Tile 2">
-                            <img src="148332938-4e66d4ca-2d16-474f-8482-340aef6a48d0.png" alt="Image 2">
-                            <div class="description">House Prize Prediction</div> <!-- Added description -->
-                        </div>
-                    </a>
-                    <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Breast%20cancer">
-                        <div class="item" title="fffff">
-                            <img src="download (3).jpeg" alt="Breast Cancer Prediction">
-                            <div class="description">Breast Cancer Detection</div> <!-- Added description -->
-                        </div>
-                    </a>
-                    <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/ipl_prediction">
-                        <div class="item" title="ffffffff">
-                            <img src="og_image.jpeg" alt="IPL Prediction">
-                            <div class="description">IPL Prediction</div> <!-- Added description -->
-                        </div>
-                    </a>
-                    <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Movie_Recommender">
-                        <div class="item" title="Description for Tile 5">
-                            <img src="download (2).jpeg" alt="Movie Recommender">
-                            <div class="description">Movie Recommender</div> <!-- Added description -->
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <!-- End of Tile Functionality -->
         </div>
     </div>
     <div class="floating-links" id="floating-links">
@@ -495,86 +383,7 @@
             onUpdate: render,
         });
      </script>
-     <script>
-        $(document).ready(function() {
-            var scrollingSection = $('.scrolling-section');
-            var scrollingContent = scrollingSection.find('.scrolling-content');
-            var items = scrollingContent.find('.item');
-            var itemWidth = items.first().outerWidth(true);
-            var totalItems = items.length;
-    
-            // Clone the items for seamless loop
-            scrollingContent.append(items.clone());
-    
-            // Initial positioning of tiles
-            scrollingContent.css('transform', 'translateX(-' + (itemWidth * (totalItems - 1)) + 'px');
-    
-            // Function to move the tiles automatically in a loop
-            function moveTiles() {
-                gsap.to(scrollingContent, {
-                    x: '-' + (totalItems * itemWidth) + 'px',
-                    duration: totalItems * 2, // Adjust duration for speed
-                    ease: "none", // Disable easing for seamless loop
-                    onComplete: function() {
-                        gsap.set(scrollingContent, { x: 0 });
-                        moveTiles(); // Restart the loop
-                    }
-                });
-            }
-    
-            // Start the loop
-            moveTiles();
-    
-            // Add tooltip functionality
-            items.each(function() {
-                $(this).hover(function() {
-                    var title = $(this).attr('title');
-                    $(this).attr('data-title', title).removeAttr('title');
-                }, function() {
-                    $(this).removeAttr('data-title');
-                });
-            });
-        });
-    </script>
-    <script>
-        // Function to handle intersection changes
-        function handleIntersect(entries, observer) {
-            entries.forEach(entry => {
-                // If page1 is intersecting
-                if (entry.target.id === "page1") {
-                    // Get all h1 and h3 elements
-                    const headings = document.querySelectorAll("#right-text h3, #left-text h1, #right-text h1, #left-text h3");
-                    
-                    // If the page1 section is not visible
-                    if (!entry.isIntersecting) {
-                        // Hide elements one by one
-                        headings.forEach((heading, index) => {
-                            setTimeout(() => {
-                                heading.style.opacity = 0;
-                            }, index * 100); // Adjust the delay for each heading
-                        });
-                    } else {
-                        // Show elements one by one
-                        headings.forEach((heading, index) => {
-                            setTimeout(() => {
-                                heading.style.opacity = 1;
-                            }, index * 100); // Adjust the delay for each heading
-                        });
-                    }
-                }
-            });
-        }
-
-        // Create an intersection observer instance
-        const observer = new IntersectionObserver(handleIntersect, {
-            root: null, // Viewport as root
-            rootMargin: '0px', // No margin
-            threshold: 0.5 // 50% of the element visible
-        });
-
-        // Observe the target elements
-        observer.observe(document.getElementById("page1"));
-    </script>
+        
     <script>
         window.addEventListener('scroll', function() {
             let links = document.querySelectorAll('.image-link');
