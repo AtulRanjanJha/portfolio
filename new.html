@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax Flipping Cards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            background-color: #000;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-family: 'Montserrat';
+            font-weight: normal;
+            color: #eee8e8;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .wrapper {
+            width: 90%;
+            margin: 0 auto;
+            max-width: 80rem;
+        }
+
+        .cols {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .col {
+            width: calc(30.5% - 2rem);
+            margin: 1rem;
+            cursor: pointer;
+        }
+
+        .container {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            width: 100%;
+            height: 280px; /* Fixed height for the tiles */
+        }
+
+        .front,
+        .back {
+            background-size: cover;
+            box-shadow: 0 4px 8px 0 rgba(235, 231, 231, 0.25);
+            border-radius: 10px;
+            background-position: center;
+            transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+            backface-visibility: hidden;
+            text-align: center;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.5rem;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back {
+            background: #cedce7;
+            background: linear-gradient(45deg, #cedce7 0%, #596a72 100%);
+        }
+
+        .front:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            content: '';
+            display: block;
+            opacity: .6;
+            background-color: #f5f4f4;
+            backface-visibility: hidden;
+            border-radius: 10px;
+        }
+
+        .container:hover .front,
+        .container:hover .back {
+            transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+        }
+
+        .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .inner {
+            transform: translateY(-50%) translateZ(60px) scale(0.94);
+            top: 50%;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            box-sizing: border-box;
+            outline: 1px solid transparent;
+            perspective: inherit;
+            z-index: 2;
+        }
+
+        .container .back {
+            transform: rotateY(180deg);
+            transform-style: preserve-3d;
+        }
+
+        .container .front {
+            transform: rotateY(0deg);
+            transform-style: preserve-3d;
+        }
+
+        .container:hover .back {
+            transform: rotateY(0deg);
+            transform-style: preserve-3d;
+        }
+
+        .container:hover .front {
+            transform: rotateY(-180deg);
+            transform-style: preserve-3d;
+        }
+
+        .front .inner p {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .front .inner p:after {
+            content: '';
+            width: 4rem;
+            height: 2px;
+            position: absolute;
+            background: #C6D4DF;
+            display: block;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            bottom: -.75rem;
+        }
+
+        .front .inner span {
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Montserrat';
+            font-weight: 300;
+        }
+
+        @media screen and (max-width: 64rem) {
+            .col {
+                width: calc(25% - 2rem);
+            }
+        }
+
+        @media screen and (max-width: 48rem) {
+            .col {
+                width: calc(33.333333% - 2rem);
+            }
+        }
+
+        @media screen and (max-width: 32rem) {
+            .col {
+                width: calc(50% - 2rem);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Projects</h1>
+        <div class="cols">
+            <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Image-Based%20Number%20Prediction"
+                class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front">
+                        <img src="7-Roulette-Number-Prediction-Methods-Deciphered.webp" alt="Project Image" style="width: 100%; height: 100%;">
+                        <div class="inner">
+                            <p>Number Prediction Based on image</p>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae
+                                suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Boston_Housing_price_prediction"
+                class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front">
+                        <img src="148332938-4e66d4ca-2d16-474f-8482-340aef6a48d0.png" alt="Project Image" style="width: 100%; height: 100%;">
+                        <div class="inner">
+                            <p>Boston House Prize Prediction</p>
+                            <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae
+                                suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Breast%20cancer"
+                class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front">
+                        <img src="download (3).jpeg" alt="Project Image" style="width: 100%; height: 100%;">
+                        <div class="inner">
+                            <p>Breast Cancer detection</p>
+                            <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae
+                                suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/ipl_prediction"
+                class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front">
+                        <img src="og_image.jpeg" alt="Project Image" style="width: 100%; height: 100%;">
+                        <div class="inner">
+                            <p>IPL Prediction</p>
+                            <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae
+                                suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Movie_Recommender"
+                class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front">
+                        <img src="download (2).jpeg" alt="Project Image" style="width: 100%; height: 100%;">
+                        <div class="inner">
+                            <p>Movie Recommender system</p>
+                            <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae
+                                suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <!-- Add five more col elements here with the anchor tag -->
+        </div>
+    </div>
+</body>
+
+</html>
