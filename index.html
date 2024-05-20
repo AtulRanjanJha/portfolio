@@ -673,7 +673,7 @@
             </div>
             <div class="form-container">
                 <h2>Contact Me</h2>
-                <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                <form id="contactForm" action="Thanking_page.html" method="POST">
                     <!-- Replace with your Access Key -->
                     <input type="hidden" name="access_key" value="4c343987-67c7-4a3f-b88d-1d1d1856170f">
                     <!-- Form Inputs. Each input must have a name="" attribute -->
@@ -799,41 +799,7 @@
             return bounding.bottom < containerBounding.top;
         }
     </script>
-    <script>
-        // JavaScript to handle form submission
-        const form = document.getElementById('contactForm');
-    
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-    
-            // Get form data
-            const formData = new FormData(form);
-    
-            // Optional: You can perform form validation here before sending the data
-    
-            // Send form data to your server
-            fetch('your-server-endpoint', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    // If the request was successful, display a success message
-                    alert('Your message has been sent successfully!');
-                    form.reset(); // Reset the form
-                } else {
-                    // If there was an error, display an error message
-                    alert('An error occurred. Please try again later.');
-                }
-            })
-            .catch(error => {
-                // If there was a network error, display an error message
-                console.error('Error:', error);
-                alert('An error occurred. Please try again later.');
-            });
-        });
-    </script>
-    
     
 </body>
 </html>
+
