@@ -77,6 +77,79 @@
             }
         }
 
+        #vertical-loop {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: 92%;
+            top: 0;
+            height: 100%;
+            width: auto;
+            font-size: 40px;
+            white-space: nowrap;
+            font-family: gilroy;
+            transform: translateX(-50%);
+        }
+        #vertical-loop2 {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 95%; /* Adjusted to position the second loop next to the first one */
+    top: 0;
+    height: 100%;
+    width: auto;
+    font-size: 40px;
+    white-space: nowrap;
+    font-family: gilroy;
+    transform: translateX(-50%);
+}
+
+
+
+        #vertical-loop > span,
+        #vertical-loop2 > span  {
+            display:inline-block;
+            font-weight: 400;
+            animation-name: verticalAnim;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-duration: 15s; /* Increase animation speed to 5 seconds */
+            position: relative;
+            font-size: 20px; /* Adjust the font size as needed */
+            letter-spacing: 0; /* Remove space between letters */
+        }
+
+        #vertical-loop > span > span, #vertical-loop2 > span > span {
+            -webkit-text-stroke: 1.5px #faf8f8;
+            color: transparent;
+            font-weight: 500;
+        }
+        #vertical-loop > span.outlined::after, #vertical-loop2 > span.outlined::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: transparent;
+            -webkit-text-stroke: 1.5px #faf8f8; /* Adjusted stroke width for better visibility */
+            font-weight: 500;
+        }
+
+        #vertical-loop > span:not(.outlined)::after, #vertical-loop2 > span:not(.outlined)::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #faf8f8; /* Inner text color */
+        }
+        @keyframes verticalAnim {
+            0% {
+                transform: translateY(0%);
+            }
+            100% {
+                transform: translateY(calc(-100% + -3000px)); /* Adjusted value for smooth looping */
+            }
+        }
+ 
         #nav {
             display: flex;
             align-items: center;
@@ -142,8 +215,24 @@
         }
 
         #page2 {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Align items to the right */
             height: 100vh; /* Adjusted to fill entire viewport */
+            padding-right: 50px; /* Optional: Add padding to move form a bit away from the edge */
         }
+
+        .form-container {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #bfdfa8; /* White outline */
+            border-radius: 30px;
+            background-color: #1e1e1e; /* Darker background for the form */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            margin-right: 200px;
+        }
+
 
         #text1 {
             position: absolute;
@@ -161,39 +250,45 @@
             line-height: 1.5;
         }
 
-        .contact-me {
-            position: absolute;
-            bottom: 210px; /* Adjusted to move slightly upward */
-            right: 300px;
+        /* Style the form header */
+        .form-container h2 {
             text-align: center;
-            background-color: rgba(74, 67, 67, 0.1);
-            padding: 20px;
-            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
-        .contact-me form label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .contact-me form input,
-        .contact-me form textarea {
+        /* Style form inputs and button */
+        .form-container input[type=text], 
+        .form-container input[type=email], 
+        .form-container textarea {
             width: 100%;
-            padding: 3px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.5);
-            color: black;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid;
+            border: linear-gradient(45deg, #ff6b6b, #f7d794, #78e08f, #60a3bc, #9b59b6);
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #b8b7b3; /* Dark background for inputs */
+            color: #ffffff; /* White text */
         }
 
-        .contact-me form button {
-            padding: 10px 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #3498db;
+        .form-container textarea {
+            height: 150px;
+        }
+
+        .form-container button[type=submit] {
+            background: linear-gradient(45deg, #ff6b6b, #f7d794, #78e08f, #60a3bc, #9b59b6);
+            background-size: 400% 400%;
             color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-position 1s ease-in-out;
+        }
+
+        .form-container button[type=submit]:hover {
+            background-position: right center;
         }
 
         #text2 {
@@ -249,7 +344,301 @@
                 <h1><b>WELCOME</b> TO <b><i>MY</i></b> <span>METAVERSE. </span></h1>
                 <h1><b>WELCOME</b> TO <b><i>MY</i></b> <span>METAVERSE. </span></h1>
             </div>
-            <h3>I AM A DATA SCIENCE ENTHUASTIC.<br> THANKS FOR VISITING! LET'S COLLABORATE ON MEANINGFUL PROJECTS.”
+            <!--<div id="vertical-loop">
+                <span class="outlined">W</span>
+                <span class="outlined">W</span>
+                <span class="outlined">E</span>
+                <span class="outlined">L</span>
+                <span class="outlined">C</span>
+                <span class="outlined">O</span>
+                <span class="outlined">M</span>
+                <span >E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>T</span>
+                <span>O</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>Y</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>E</span>
+                <span>T</span>
+                <span>A</span>
+                <span>V</span>
+                <span>E</span>
+                <span>R</span>
+                <span>S</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>W</span>
+                <span>E</span>
+                <span>L</span>
+                <span>C</span>
+                <span>O</span>
+                <span>M</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>T</span>
+                <span>O</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>Y</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>E</span>
+                <span>T</span>
+                <span>A</span>
+                <span>V</span>
+                <span>E</span>
+                <span>R</span>
+                <span>S</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>W</span>
+                <span>E</span>
+                <span>L</span>
+                <span>C</span>
+                <span>O</span>
+                <span>M</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>T</span>
+                <span>O</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <span>M</span>
+                <span>Y</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>E</span>
+                <span>T</span>
+                <span>A</span>
+                <span>V</span>
+                <span>E</span>
+                <span>R</span>
+                <span>S</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>W</span>
+                <span>E</span>
+                <span>L</span>
+                <span>C</span>
+                <span>O</span>
+                <span>M</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>T</span>
+                <span>O</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>Y</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>E</span>
+                <span>T</span>
+                <span>A</span>
+                <span>V</span>
+                <span>E</span>
+                <span>R</span>
+                <span>S</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>W</span>
+                <span>E</span>
+                <span>L</span>
+                <span>C</span>
+                <span>O</span>
+                <span>M</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>T</span>
+                <span>O</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>Y</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <span>M</span>
+                <span>E</span>
+                <span>T</span>
+                <span>A</span>
+                <span>V</span>
+                <span>E</span>
+                <span>R</span>
+                <span>S</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>W</span>
+                <span>E</span>
+                <span>L</span>
+                <span>C</span>
+                <span>O</span>
+                <span>M</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>T</span>
+                <span>O</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>Y</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>E</span>
+                <span>T</span>
+                <span>A</span>
+                <span>V</span>
+                <span>E</span>
+                <span>R</span>
+                <span>S</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+            </div>
+            <div id="vertical-loop2">
+                <span class="outlined">W</span>
+                <span class="outlined">W</span>
+                <span class="outlined">E</span>
+                <span class="outlined">L</span>
+                <span class="outlined">C</span>
+                <span class="outlined">O</span>
+                <span class="outlined">M</span>
+                <span >E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <span>T</span>
+                <span>O</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>Y</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>E</span>
+                <span>T</span>
+                <span>A</span>
+                <span>V</span>
+                <span>E</span>
+                <span>R</span>
+                <span>S</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>W</span>
+                <span>E</span>
+                <span>L</span>
+                <span>C</span>
+                <span>O</span>
+                <span>M</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>T</span>
+                <span>O</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>Y</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>E</span>
+                <span>T</span>
+                <span>A</span>
+                <span>V</span>
+                <span>E</span>
+                <span>R</span>
+                <span>S</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <span>W</span>
+                <span>E</span>
+                <span>L</span>
+                <span>C</span>
+                <span>O</span>
+                <span>M</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>T</span>
+                <span>O</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>Y</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>E</span>
+                <span>T</span>
+                <span>A</span>
+                <span>V</span>
+                <span>E</span>
+                <span>R</span>
+                <span>S</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <span>W</span>
+                <span>E</span>
+                <span>L</span>
+                <span>C</span>
+                <span>O</span>
+                <span>M</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>T</span>
+                <span>O</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <span>M</span>
+                <span>Y</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>E</span>
+                <span>T</span>
+                <span>A</span>
+                <span>V</span>
+                <span>E</span>
+                <span>R</span>
+                <span>S</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>W</span>
+                <span>E</span>
+                <span>L</span>
+                <span>C</span>
+                <span>O</span>
+                <span>M</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>T</span>
+                <span>O</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>Y</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>E</span>
+                <span>T</span>
+                <span>A</span>
+                <span>V</span>
+                <span>E</span>
+                <span>R</span>
+                <span>S</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>W</span>
+                <span>E</span>
+                <span>L</span>
+                <span>C</span>
+                <span>O</span>
+                <span>M</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>T</span>
+                <span>O</span>
+                <span>&nbsp;&nbsp;&nbsp;</span> 
+                <span>M</span>
+                <span>Y</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                <span>M</span>
+                <span>E</span>
+                <span>T</span>
+                <span>A</span>
+                <span>V</span>
+                <span>E</span>
+                <span>R</span>
+                <span>S</span>
+                <span>E</span>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+            </div> -->
+            <h3>I AM A DATA SCIENCE ENTHUSIAST.<br> THANKS FOR VISITING! LET'S COLLABORATE ON MEANINGFUL PROJECTS.”
                 <br>EXPLORE MY PORTFOLIO AND DISCOVER THE POSSIBILITIES.</h3>
             <br>
             <h4>...SCROLL TO READ</h4>
@@ -269,7 +658,7 @@
                     <br>
                     TAKE A CHANCE
                     <br>
-                    BUILD AND OWNED</h1>
+                    BUILD AND OWN</h1>
                 <h3>..AND MAINTAIN GOOD HUMANITY</h3>
             </div>
         </div>
@@ -282,17 +671,21 @@
                     <br>
                     TOGETHER</h1>
             </div>
-            <div class="contact-me">
-                <h2>Connect with me</h2> 
-                <form action="https://formspree.io/f/xzbnkgnn" method="POST">
-                    <label for="name">Your name:</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="email">Your email:</label>
-                    <input type="email" id="email" name="email" required>
-                    <label for="message">Your message:</label>
-                    <textarea id="message" name="message" rows="4" required></textarea>
-                    <button type="submit">Send</button>
+            <div class="form-container">
+                <h2>Contact Me</h2>
+                <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Replace with your Access Key -->
+                    <input type="hidden" name="access_key" value="4c343987-67c7-4a3f-b88d-1d1d1856170f">
+                    <!-- Form Inputs. Each input must have a name="" attribute -->
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                        
+                    <button type="submit">Submit</button>
+                
                 </form>
+                <!-- Required for hCaptcha -->
+                <script src="https://web3forms.com/client/script.js" async defer></script>
             </div>
             <div id="text2">
                 <p>LET'S HAVE A BLAST! LET'S JUST THROW AWAY AGE, GENDER, REGION, <br> STATUS, ETC., DON'T COMPETE, DON'T FIGHT, COOPERATE AND SHARE <br> WITH EACH OTHER AND ENJOY IT TOGETHER! SO THAT YOU CAN STAND <br> THERE IN THE NOT-TOO-DISTANT FUTURE AND DREAM OF ANOTHER NEW <br> FUTURE</p>
@@ -406,5 +799,41 @@
             return bounding.bottom < containerBounding.top;
         }
     </script>
+    <script>
+        // JavaScript to handle form submission
+        const form = document.getElementById('contactForm');
+    
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+    
+            // Get form data
+            const formData = new FormData(form);
+    
+            // Optional: You can perform form validation here before sending the data
+    
+            // Send form data to your server
+            fetch('your-server-endpoint', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // If the request was successful, display a success message
+                    alert('Your message has been sent successfully!');
+                    form.reset(); // Reset the form
+                } else {
+                    // If there was an error, display an error message
+                    alert('An error occurred. Please try again later.');
+                }
+            })
+            .catch(error => {
+                // If there was a network error, display an error message
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            });
+        });
+    </script>
+    
+    
 </body>
 </html>
