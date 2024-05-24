@@ -1,278 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parallax Flipping Cards</title>
+    <title>My Projects</title>
     <style>
-      * {
-    margin: 0;
-    padding: 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: black;
+            color: white;
+        }
 
-h1 {
-    font-size: 2.5rem;
-    font-family: 'Montserrat';
-    font-weight: normal;
-    color: #444;
-    text-align: center;
-    margin: 2rem 0;
-}
+        header {
+            background-color: #070707;
+            color: white;
+            position: fixed;
+            text-align: center;
+            z-index: 1000; /* Changed z-index to 1000 */
+            width: 100%; /* Added to make header full width */
+        }
 
-.wrapper {
-    width: 90%;
-    margin: 0 auto;
-    max-width: 80rem;
-}
+        main {
+            padding: 6em 2em 2em; /* Changed top padding to accommodate fixed header */
+            display: flex;
+            justify-content: center;
+        }
 
-.cols {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+        #projects {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            align-items: center;
+        }
 
-.col {
-    width: calc(30.5% - 2rem);
-    margin: 1rem;
-    cursor: pointer;
-}
+        .project-row {
+            display: flex;
+            gap: 5;
+            align-items: flex-start;
+        }
 
-.container {
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    width: 100%;
-    height: 180px; /* Fixed height for the tiles */
-}
+        .project-item{
+            background-color: #1e1e1e;
+            border: 1px solid #444;
+            border-radius: 20px;
+            width: calc(200px);
+            height: calc(200px);
+            position: relative;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
 
-.front,
-.back {
-    background-size: cover;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    background-position: center;
-    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-    backface-visibility: hidden;
-    text-align: center;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 1.5rem;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-}
+        }
+        .project-description {
+            background-color: #1e1e1e;
+            border: 1px solid #444;
+            border-radius: 20px;
+            width: calc(300px);
+            height: calc(200px);
+            position: relative;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
 
-.back {
-    background: #cedce7;
-    background: linear-gradient(45deg, #cedce7 0%, #596a72 100%);
-}
+        .project-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px; /* Apply border-radius directly to the image */
+            margin: 0; /* Ensure there's no margin */
+            padding: 0; /* Remove padding */
+            border: none; /* Remove border if any */
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
 
-.front:after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    content: '';
-    display: block;
-    opacity: .6;
-    background-color: #000;
-    backface-visibility: hidden;
-    border-radius: 10px;
-}
+        .project-item:hover, .project-description:hover {
+            border-color: rgb(171, 122, 241);
+        }
 
-.container:hover .front,
-.container:hover .back {
-    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
-}
+        .project-description {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-.back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+        .project-description p {
+            font-size: 1em;
+            color: #ccc;
+            margin-left:20px;
+            filter: blur(5px);
+            transition: filter 0.3s ease-in-out;
+        }
 
-.inner {
-    transform: translateY(-50%) translateZ(60px) scale(0.94);
-    top: 50%;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    padding: 2rem;
-    box-sizing: border-box;
-    outline: 1px solid transparent;
-    perspective: inherit;
-    z-index: 2;
-}
+        .project-description:hover p {
+            filter: blur(0);
+        }
 
-.container .back {
-    transform: rotateY(180deg);
-    transform-style: preserve-3d;
-}
-
-.container .front {
-    transform: rotateY(0deg);
-    transform-style: preserve-3d;
-}
-
-.container:hover .back {
-    transform: rotateY(0deg);
-    transform-style: preserve-3d;
-}
-
-.container:hover .front {
-    transform: rotateY(-180deg);
-    transform-style: preserve-3d;
-}
-
-.front .inner p {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    position: relative;
-}
-
-.front .inner p:after {
-    content: '';
-    width: 4rem;
-    height: 2px;
-    position: absolute;
-    background: #C6D4DF;
-    display: block;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    bottom: -.75rem;
-}
-
-.front .inner span {
-    color: rgba(255, 255, 255, 0.7);
-    font-family: 'Montserrat';
-    font-weight: 300;
-}
-
-.container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure the image covers the container */
-}
-
-@media screen and (max-width: 64rem) {
-    .col {
-        width: calc(25% - 2rem);
-    }
-}
-
-@media screen and (max-width: 48rem) {
-    .col {
-        width: calc(33.333333% - 2rem);
-    }
-}
-
-@media screen and (max-width: 32rem) {
-    .col {
-        width: calc(50% - 2rem);
-    }
-}
-
-        
+        .project-title {
+            font-size: 1em; /* Adjusted font size */
+            margin: 0;
+            text-align: center;
+            margin-bottom: 10px;
+            position: absolute;
+            width: calc(100% - 70px); /* Example: to make it shorter, reduce the width */
+            top: 85px; /* Adjusted top position */
+            left: 30px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+            padding: 5px; /* Added padding */
+            border-radius: 10px; /* Added border radius */
+            backdrop-filter: blur(10px); /* Apply background blur */
+        }
     </style>
 </head>
-
 <body>
-    <div class="wrapper">
-        <h1>Projects</h1>
-        <div class="cols">
-            <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Image-Based%20Number%20Prediction"
-                class="col" ontouchstart="this.classList.toggle('hover');">
-                <div class="container">
-                    <div class="front">
-                        <img src="7-Roulette-Number-Prediction-Methods-Deciphered.webp" alt="Project Image" style="width: 100%; height: 100%;">
-                        <div class="inner">
-                            <p>Number Prediction</p>
-                        </div>
-                    </div>
-                    <div class="back">
-                        <div class="inner">
-                            <p>A Neural network which predict the hand-written Number from the image using Decision tree.</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Boston_Housing_price_prediction"
-                class="col" ontouchstart="this.classList.toggle('hover');">
-                <div class="container">
-                    <div class="front">
-                        <img src="148332938-4e66d4ca-2d16-474f-8482-340aef6a48d0.png" alt="Project Image" style="width: 100%; height: 100%;">
-                        <div class="inner">
-                            <p>Boston House Prize Prediction</p>
-                        </div>
-                    </div>
-                    <div class="back">
-                        <div class="inner">
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae
-                                suscipit c.</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Breast%20cancer"
-                class="col" ontouchstart="this.classList.toggle('hover');">
-                <div class="container">
-                    <div class="front">
-                        <img src="download (3).jpeg" alt="Project Image" style="width: 100%; height: 100%;">
-                        <div class="inner">
-                            <p>Breast Cancer detection</p>
-                        </div>
-                    </div>
-                    <div class="back">
-                        <div class="inner">
-                            <p>Breast Cancer Detection system based on Machine learning algo like KNN.</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/ipl_prediction"
-                class="col" ontouchstart="this.classList.toggle('hover');">
-                <div class="container">
-                    <div class="front">
-                        <img src="og_image.jpeg" alt="Project Image" style="width: 100%; height: 100%;">
-                        <div class="inner">
-                            <p>IPL Prediction</p>
-                        </div>
-                    </div>
-                    <div class="back">
-                        <div class="inner">
-                            <p>IPL Prediction system using Logistic regression</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://github.com/AtulRanjanJha/Machine-learning-project-python-/tree/main/Movie_Recommender"
-                class="col" ontouchstart="this.classList.toggle('hover');">
-                <div class="container">
-                    <div class="front">
-                        <img src="download (2).jpeg" alt="Project Image" style="width: 100%; height: 100%;">
-                        <div class="inner">
-                            <p>Movie Recommender system</p>
-                        </div>
-                    </div>
-                    <div class="back">
-                        <div class="inner">
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae
-                                suscipit c.</p>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <!-- Add five more col elements here with the anchor tag -->
-        </div>
-    </div>
-</body>
+    <header>
+        <h1>My Projects</h1>
+    </header>
+    <main>
+        <section id="projects">
+            <!-- Individual project items will be inserted here -->
+        </section>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const projects = [
+                {
+                    title: 'Ipl Prediction system',
+                    description: 'This Machine Learning project uses Algorithms like LogisticRegression and RandomForestClassifier to predict which team will win a match these prediction uses the past data of matches played like the bater, bowler, batting_team, bowling_team, numbers of run, city ',
+                    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAN7QoTWWwDRc3-1Tzpu2u23zz3jZXG8EtYQ&usqp=CAU'
+                },
+                {
+                    title: 'House prize prediction',
+                    description: 'The House Price Prediction System is a tool estimate the market value of residential properties. Utilizing advanced machine learning algorithms including Linear Regression, Gradient Boosting Regression, K-Nearest Neighbors (KNN) Classifier, and Decision Tree, this system provides accurate and reliable price predictions based on a wide array of features.',
+                    imageUrl: 'https://www.vantage-ai.com/hubfs/House%20prices.jpg'
+                },
+                {
+                    title: 'Movie Recommender',
+                    description: 'The Movie Recommender System is an advanced, user-centric tool designed to provide personalized movie recommendations. Utilizing a blend of collaborative filtering, content-based filtering, and hybrid approaches, this system tailors suggestions to individual user preferences and viewing habits.',
+                    imageUrl: 'https://repository-images.githubusercontent.com/275336521/20d38e00-6634-11eb-9d1f-6a5232d0f84f'
+                },
+                {
+                    title: 'Breast Cancer detection',
+                    description: 'The Breast Cancer Detection System leverages the power of the K-Nearest Neighbors (KNN) algorithm to identify and classify breast cancer cases effectively. This system is designed to assist medical professionals in diagnosing breast cancer by analyzing patterns in patient data and predicting the likelihood of malignancy.',
+                    imageUrl: 'https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41598-023-46921-3/MediaObjects/41598_2023_46921_Fig1_HTML.png'
+                },
+                {
+                    title: 'Number prediction based on image',
+                    description: 'The Image-Based Number Prediction System is a sophisticated tool designed to predict numerical digits based on pixel brightness values in images. Utilizing the Decision Tree Classifier algorithm, this system accurately identifies and classifies numbers by analyzing the patterns in pixel intensity.',
+                    imageUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAABklBMVEX1+v/s8/7///9NTU0JafnE1/L3O0Tn8P3m5ube6v0/Pz8AZvm/v78AYfnv9v7t9P4AZPkAX/lJSUkAW/kAYPlFRUWuw/w+Pj45OTnF1v29vb3z+f82ePkZb/ni7f1MhPrX5PmXtvyBp/sLmVL3Mz3v7++cuvttmfq8w8O0tLSmpqZ0dHTU4f49f/r3JjIsLCyEhISFqftWjPpoaGhaWlqZmZn3LDfX2+GMjIxsbGzMzMzM3fT/+PgsKSWcnJxhYWEAAACkudkAVPje4+s2WI7vp6r8wsT7o6YAk0QgICC6y+T+4eIAPX/lb3To09T5cXb4WWDBydTbiIvxio7Mpqj0YGZllfrTmZvzR0/Yj5H5gYX2FSX2ABb90tP+6er6j5PP3NRss4rHsLGbp7qKkZzrvb+4wtM1WqVQSz61zPwvXbTUmJoXEgb7io640sNIqHKVxKj2AAAenVvg7+aEvJsAjTNfr4HusrSjybLgfICOmanwlpmImrtnf6gTQ4LuoqVBUnluhKxFY5UjYtEdZN0AVtzff+p1AAAgAElEQVR4nO2djUPbVpbo5QtBsi1L/sBYscAYagG2iW2CsUEQyIQhCUkDtA0ZJoS003xsebNpZ6dvy3Qy2+zO7P7f75x7r6SrL2MnabqdlzNT4g9Zln4659xzzj1XlqSP8lE+ykf5KO8ixLSUft+27V/6QP63i7nbt9UyE5X80kfzv1hMxkl15SOsGLH6flDleqPxEVaEEErKwVRf6zS7+WKxaHyEFRaPVH27swOU8vkxlOL/B7DIKOdINNsh1eh0gdOYJ//csEwLR3y1rAz7AWI5qBqdMR8olLc1Q/PtPvYhRaHWtARSHjJAQlTM+tbDpN4BlqZpyMs0/5dSU0BDANPXf/zxwfGDJfuys6SnYTJUdmMjitTbwzI1JrqmD6ZFN/zQQM0+kvr68+Ner1er1SaWypd8AM4D3DozwO1uDKrBsDDGZ6JYgfPlsHSdfs2Ao+Ay5FleKlpCp/Sj8cPxSFRBgNSPJ8BpgkqvXLYG7lXXdVNRHVQxpAbAsmzVF5GVVbvv/0bGS0/oEZ82ZZlqHNOr96hbesKVEDWzAiJLiOp3xz0OisJ6qA728JqpMwtsxKHKQ5iVKt2oJOEbEqFL3y9DjLHeaTY3NprNzvp2HYmptv9LTWAV+ii8KFdkuYKvc0zvT7USUaIzagn4Sg2Oe+l3JyKqiYna50v9gXslClWM+kYqihNQGttYb5RtW7niyGa1IpxSX22WIBZzBAKznU4DePm+FXVGDnLQgBRIhT5mlN6fakXC4lJJJkBBlh4e9Sb8UjtcGjwcMrVaj/BV+VRpY63ctyxLQbnik00HmKKuBz8KxLZ9+mzqCS3s4HWZyc8DS46HJVcqMAQ+aIlaVWu18Lnn4SOORKPeqh62wGJqbF1VKCcLcfXtKyGp6tGw4NONsvBVgABNIPjdOpyPAEtjCug7xETiLdmBLxxAq5LcLS/5dKp3fPb0/mGtVS7zwzR1M+BjwQSpWgUtMJ/Kr9sMlKKUt5vd/X3jX8OwQJKmpa6FfV1KVX2s4sICVC56TE6EIfosDTSg8taw9AG0YLCxl37PjRCHwtohQTkBD7/LxwNT8sMifWRV3gmcbN7YqCMlyzp4c/hG2W+vdSxl+0YkLLBHtRGG1VW96G5QRICKxd4zw7CQVWUkQh5ZMxFkBc5RsEPZUa1a6/Ax/LlPzh5vkdun4OF19wO6OIpSd9XI+62oWOrYVKdefDFx+uro2NrZtxok346DdYXByo/lHaWEP03V9e/moOgJ/btzNHAxTd+mpgknNQIqDIKcJxqereikkvA/73kyWWGq1XuMGnV8+pS8Or1DtloQw2veZq4mahqysgMmmC+t91GplL2JozsnZ7fJhLW+r9RtxYo2Q4RVLwLhLumXEHXXbgK3dXU3IbCKtaWKNxiaUti/V0aBBU5Rcy3HD6tCAytR1eQEU60TQrbg/09uk9steDxxslTWXFLCB6hrb/pMKG90KKpvv1P2Ts7A5b0ihwf1fdu+WSL5e3GwysVi3SbERuwbCgEXBv5dE6wrlpVZ4f7ddP27/+1KVCA7CJbzVZosenggBWrnN0sNVav2mjx9ckTI4fFhq3VMnrYghpcdKwyy2vGZYGoHDdD6y5/v3v2TVTu9s/Vvd+7/20V/v66squTGAFgGXB1STo11Uac7+bFiWeVHPTjh05zB0M12fNtqlcoIMSqkMJ4daj4wqFYYUfsEVav2JQACG7zTq/X2CDk7PAUPnwgJTU26Iqt8sUG16pPv/vTJJ3+2vji5vXXx9M7TV5bRaXY6xr/GwlLzY6mSTcAau/U6IWCG4N9letgDHZYwGDq0/Fz10QZDHMCc7f1qVEGfVUn6aVHVmgCH1ToDWMgNvZfg4X2s6mMiq1QTR8Bvv7v7h+/JV3fvfnvQerJ3/+nW3om1um/sdNYacT5rSYVPGwpBP180CFnNo39ng5w+OMr0BkPm34NvjzQY4oVxrdZ/thWmWsmwavX2Hk+0tshjjE+PQMXOjkUP79lg3e/YQa0A1l/u3v0L+Y58d/cH8+Ts/lHrSe9QsVlYGgfrM7ULsCxCwy0wxC717wwCjm8Dzk8cDKPeHsW/U1omzTjNMCxZp3+DqvV5rVerHRPSoiF87RWEWkuqHtgKWJV98UIXvJVV31+3vvvkz+QP34NqKRenT45eH1jfKwrW4tuxZviZuppHWB2MGXYIyaN/HwjBPTtnMIyRkQZDLqisIVgJPH/dg8XSLD4gtnAkhLD09u1WjZDHrof3scr7TBCkmW/s979C1frT9+DildcH30OwdbKn7BtGKRXr4D9TwUsZ1FdBgEVICfx7WY4+Tf/g6A6GMaKHaxyXChsSzAAsOrIhLFkQploTQOgI/oJWtU63yJcPy6KH12jcLvr20hqold0eI2PtrvV/737y1Vd/vvvdt4ry4jGoZu2xlS+lUpfDWkVYHUIM9O/RQ77pD9JxMEw4b72nBBp9kxaEJWN1CRxXwg8LVasGjv0+WmGPkKdPgZvfw+8iq1WBlVEHVo12fY3YRG1Yn3xy999/+Grrq68OntC0/MTqGINhoQGirwJzXieWIcbvUaw02+4rlkRwMHQCKdHVv5NUEpDpSEEfDbSSNIJ3OLEoClWrdUH20F21aCz/pT+Gx4HQ7gixaEkFVp2b/Tqw6pKO8u2/fweofrj7g3VEYbWUxkBY99T1PPNVAGubKCX071EVXc4K6960ecJWNJPbpA6kXIvEihkM82+talrFDMJKBFNFHnKC4gCss8dnmESffPm4V5sQPTx1WGtCjlOimaC9b5cVrDSsNq1vERXol3JB8/LeC7s9GNZaEX0V8i/WIetB/+56Vp7BO6xwxLJVnHbCCnTZ7ms04Qb/4cGtVDf5rjerFfmSeY6gJGQtQrPC6BgsTV36kWoUeXpYo/WHiZZa9jmsejHA6uTIUttta8yuN/fXLOsPgApg/UmhmlV7rVwCa7vIfBXAKkPWk1LLobguAdkGBtgIrKw+PHnw+cMyA2b3WfVJln1UTF1OOtBA0SrD+nrYFejkELDYA1AtdFZ3jtxKYM/z8DI6LCFmMCirWu9Qaty0iH1zzLYa1p8oLIzia7TWanWNAbBo2WFnu8E1S011VXUzTItdTPgDXvVziG56vZMfHzJefZzMMF1f77epRCW56UBLDqtf4a+PVCymWl8enQr15drvHQ+vY+Te9Jy7UQZWtSOg9YW03li72bGUnf2G9WcKC6N4+nFrfTAs1NQi09aikQL//tmVavBw+fHB33556ZhdRogIHyAvUC8NTXGQwuhypXrlynuHRb2Wf9LC8fDUCBuew8KwXTm5Q0it19qTmjfrpN42Sm3lW6ZaP5jUxbcO4FXjxsuBsIRkYB1gXUlGHx78tdUl70LWehOfl5eodsmXVRhIdfOSLUxQUWrMg1mJFQVQrc89WKDwLbdK4zfCIiiScjRx8YTcf1VrvbBsq9OGkMpobnGvxVx868I2Nta34zWr7INVbKj4qqz7j86BBY7goW9WpdZ78DXFpYFXi58XBdkcDEuD8ABEHgkWqlbNOZDaIbpS5uE1GIdszwjzOxAzHPawWH9BJmonltVET55KtVXlE8fF91qQ89DkcDMWluorIBbLFNaVKFYJ5rJ8ek9x4SHaCY+vjqXfILYr1YGskrTGV0lWQgF8mJUHC70Wdc3UJSzRWWIOUTTCIhaPD05gy9bRVutIOThQShirp0p56y/MEK3Xbw7YRJiiDICF/N3qdFddYu5Y9x2d4989lyXiArcKrn7XG8Ug3MaI2zedfGVgEQJZybQakxgFFlOt3snvEZTa38XSe4J7964QjCpWuQS61ZronUGcflCbUOw2pWWsbX0HinX3B0WQWFifgWV3dzY2drBDMF9E/04l6Ts6BxgcA7DqtfxzwXC0X1PlcmHJujDDQCNU7crARBKCdI1PzY8EC1Vr4o9LS0Aqoek8etXRu6+77qW4DirTXm+r0uvWROtEAVY1DLeoarUxof7DV9aQsNxeh3JjfXXdgXXFd3SOUJdV2zu7fdgK2OLnqFueZsmVAKzElUFDgDMVJFdCNdHBsEC1yupS2d7FFgPHnVHFElJCsMFuvbHf3pZetCaQFVzeQ6lOaRk71l/8qAbBAlafUeHEnDf80RZjBS7rx1oNy9DkzE9roqZ6wTOduhJgUQxXBgWmFV7QMZMV8YNDwNIwdhGqNwmuWJ28aITb+2SNkEbTAm81Qa0Cwq01pGUYfQGTZSm2XX4G8jJ2SHTJATH3SSUcbaHLat0m5D7wek0dq2uIf1wq990NK2iJfliVgWGWO8mIXmtwnBWAldhVd93c0VMsb4zPQ9Rg7zfKZKNDSmOK9Zhf5dYbCcKHdkcAZdc73RS4smIRm2nyq8+fXQbMkxAsdFk9SDDuP6lR1WqdHNf4V0MGq/pnr4QPIoXqcLDC9eMQrOAL3lxQpGKl0AhVhXTyXQvSQdv6wqF1Ya22644FWv3tbsnfM5LPF1Mbw/Kqhi4pdVkntx/XKCzUMXJ2QkPfh2q5H+dsqLMaHGahQrmwLnFaUQBFWJpPsYrbltJo1yEdJI2dHauxX5cuHFpnis1ZWXbTiOzZglHv+aUGSSV4RNRlwZfUeq/BDE8vaMZP0BqPQbH0uJOkzmqzOggWMmKTJMloWIMBekFzgsVY3lCYRxbr+8baTaWzjwFDe906YO4DhkQH1UYprmcSu2yej65a1GVhDfew1gOfVZsAUK8A2B5Exl/DUBjby0EpXBmYRyMjqoBaEBb1BTqa9SBXJsDC4N1LdHCG8M2FpTT3u8rNujUGeXJ7BzKfHrJyvFXHiEdFd1IcxhgDJw1HARrcovp05/QOliafbIE91n6EwTv+XBisgTEpHQUjNEveZd2uNvy3uytDlBucmw7Bwqxw2zMpYNE7PTqT7J3SjrXGooWiDW7eYWWp+QH9pVxSG6OqVoJFWVhvu3+n1QLt6mG7wV7PHzZEwhockzKnpUlBB6/b3iIkXqAFaLoWAsZhJbh7d+vuoFjW69rjXuvwwKrbNksIIRKtS3s1zmrNuBTVGDr72FJEtGqhy+q1arUjbO/Bpqi901br6PZx6/dLmEjHCsak8sCYlOeGmpnw9cvQIKBerzcajXpdgGb3dwO8xEIEfMTNCjEpPL1Ptmqt0y8Uq942HFrrzijYjGowjZLSpaYoxjzYyTmxdf9xrQWOqtY6g5EQrBEyn5OlgYpFYVWuXFJgxjmcZDLpjxwAVqdUdGRsp8lahGm+vCs6MQ8Wde+uYq2Bx+qRx1tHW8enCiTKHQfXvspYBdvbBtH66/JgWGIYD9esDOp0B5vHSGuCDYXkVa33cKkcbjEIwEpeWvqTk6zq4Koohk9iwDTGWq/zq9gijE3VfTmsztQK3RQaonNr4vHjL/fOSO319ycnL6T+Bk2gHc0aklURAtUhaIkjU3npd1hqrB2BTqF7v/ME/txuYdgwsGyOKAbHpMwSsVdGwwq8mIs2QwMVEttYK9MpgN1QL5IqzFLkNyzlxekWqP/926cKhFet4wNJHWuXjDHKytooUhCDx8KxfMkw2hiGXWaJ1YTuxMfgsh7sEXLyBKzvEA6BtJjf+lotRzT6BGBdUvoTmV0Gix5/sbi6xtQr4Lx8VlhXrONWDy7pYe+L708wtGo9VqxGad+mrCAaAxA3bkTHo66k2s+qm10ML0qXeHmdVjBl5rJOsNX1KSFbpzAk3u5hCH/8YEkNta74LQMRDN/4oPthrcZd9nwx36kjLl9Yhla4454lIrk4Pj19vXd68KLF6yOvLYUmOVa9REEk740NjrOMnUo1+bJN+0kHw2JOF2ihy+q17lBHRbPpI0x6np6W1XJkNOpmbCP0/4mwuJ7sDDiLfGqjofr8pW4LqU6+CVgaiqS8OXly+P2hO102cUGNsI/joLHqgoj9FqObrFY5rMHx1mayout09hxcVm+idXRx/+wYffzWkxYmPZ9DPBqlWFQhaRQw4sS+uBMY2roDTgMMrem/VLoYkaIV7qR2dhqKdXDA2xkordfMYaE6Gc0KgLgxIH7Il268TCY3d5j2pQa7rSQ7c50nhjVaJu2BZt05BL81ERM2wNgmyyxmejdYA1nh/IrvUmHg4Hq5EiDZJ6SvNJqqZZ3BuM0n8ehAiEYI27Rfgmo9vxGbGxaBlfz8BoQcnN0gxdrEUAtgaeiyvFrfEQsc7vwxJmygXbOsEP/2sCBzVy8ZqfxWiC7LdnQRp3TqzX7HWifFprVmW9aLwx7wqr2mVujoTRtpPLtRirbEomG8rMC7KVddY7LqzWpFp8qBZoguSyiO1o4g2CK3sYwVGWKxuZrE6GYoVuAhc1cHDlT5TkCvbfCgjklBRGp19m2LlK39cn+/PbbWl8Ddt06pETqLJfKpUunGvcrLduSQCKzuJV/69K4URaqC7Q3MWyXgr0xdlkCrdXJ48gTDhihYcsWjNVpviAALyxzirGaqlDL8MVHQCjE9cpeMpFTFapetRtPutLGXqGS0u+juLygscS8lYzO5WTTCjgteg3cMn42GVAvrIaw2Aph0XNOA5ZkHwRnDWmzYINOSCpt8eBdYwnx5fgyUxLKbJfFsAlboi7IMGPAMsMEU2Vm1VmmaA8HlRp16rLJIpmiUNpPVnRCtopHfrFbzAZ0TvNa9e7/5zT1hBjCZRMWiLuvBSc8/BdYrx8WjdL5CfxtYAns/rC7Pr+oerXxgLPT7d4jS6/uW3bCJsW3xegPwalPF8se6RaNYrSY7ATefMsbg1Z2gffLiFoKi4h6xmUiyWXVMI5aWyr97MOHxomWs6HgUYLkdxiOx8sOyPaMq2RwW8bJFsEJ/orUrJIY4UVFulko3VeWmW5zB9gbq3ksBAEYeuPzV5+ZTRrdarXTaoVV3zeUrDigU53JV/sYCJplVlujtEx4+cFZwe2GDN8PviNsH+rawdLD9pABrDDD1ux34a7snmg9YIc2i3Vxn22JTW431HWV738A+ZIRFzbAe9OZFJJMU3XzKWE0ivwhP5oG6t+mWKrV7n1ZpGxseSILdYQoUrPw5rWH33LDBneAXVSuZZIo1YgDPYbEsy3YjTGy4IztFo06I5VTr0ArFPhHQxLJntxiS1k4evH5xgGsvEVm73QanhWmh1QlFJEWM05ObOIQUi6liPtVuwnMYCEOsxop/Q0xXqhVc4etdqc1PBfeFbTKJvk316/Ma7d9UnaNMiCUlV9vYp0Zi5fh31lOjumtHi0CJGDDCEaI4sHAs1L3LROEKgyFQaWHfXev0lbX3Attj+kvbnS5NCyOiN6pJ1WoXeN6A3PpGB57diwxWi8/BLYXq23ry05cBn4S8EJf64PShEza4nW6JKBk+zDJxtRPfSZLDcsY2SqmEC2fYAjYqOP1Gm5edT6hCsgPx+0FrD20AotBWqzVx/MXeGVsKrfQj9AVobQCfZHP15ebmy+fPkVwqMvjKN6P77T79TbhNQ2e4HnplrPcEC2+2YfIZQDaseLU/1CzbyJdAv9xwEq2QfTXzcBSWu4y5qCgvjrGY1OvtKa0J1uvWmniDsNTIXJBaXjWJlOjfZDemdlOMaiGTXv70H6FJfI5LFRpB5Ain9Taa5a3bYXUhCJscWNh+Tta6oF/EWTHhRqTwzUwRk2KYBZHDxas7WJ48fXHg5h4ADiRirTOj1aGkuDQjwlQqRsSZar/56be//W00AZn2kjpPB7AaCRZ4AjYDn3RgufFQu+7EWaIV8tYZAZbruiEzfHNy0jp69fr04IWbe/Re0BmdmCQqdeMZ0nr2/CX8sxnl3KmUIrIW6e/A6qeg13K0q2/7X4iDNXxMauI9b9hu+FLfsrrBz91wwix35srNC/2wHLpYUn7do9bXOrhwYbXOaIk0Jj1P3YCIfbNrW2N/haGwGVcTLH0WZiL9B8K6F1MG1QW9SsS7rJFgacItHXyF0mIDOFkW/PGqVV5eCLAqqI1VERYEn1+0eiinyt5pj8vpQXTkwCmkgNFzgLXTBWrP4srNqQhY2j0ww79f0oiXiAyzROQjiSZq6K5bKDWAU7/dRmSubQgRqSzrUbBe7F2g7CkHe45Q/x4PC2Ot5k63u9p96RRHh4SVMKs//S3MKgLLAFajwDI1ttbMkapT+6PuHZcswT/cMB0r5M2uNIwNwqK3s8WFWd5Nr5TBsKhm7ayuro6sWeA6QnHWYDDvCAujXn93rc2tcB0ooR/yYDlW6Gl1CJbVuVlc7awXbyqN/TaXm/3Lfdbqzk732UCfFTX/rlc/DXms0UiNFsCbmv+2KhCgsKGvyLKc4hrAcgZDVci12JGFYK0jY6LcZCvjWOO7PWg0LBo0Fn32DEfDailOs6JGQ8wNQ+t4Brmnd4UlBZaiuLBSNs1yMIznmSHLC/3iHw1XLWutUd7Yuqnc7NfbPlhxcVa+1P5MiLM2jRhaRtSJai8/rQTNTh5Rud5hugJg8bQYKZFUySBushOskbqwxDirUVTIdqnbtlUPVj0+gh/DeRwewtMI/p4RU5knuKQwoEbm337SAncqSbi5GBPqZnZBfhZYTg0hj/ZkqRg6OBakhiZK9FAEX9/vk/Iq2S+zclbJMIx9LNxE54bgsTC6urf67B7khqWXrOgQ5bb+c+b6/MJV7M4TmJn/9XdJDsASAypdk3nZBhv/3j8sr5yFCTQVi51maKYCpeLLDVOgQDv9DmkQo6FgbaadWl1v2EqwAu+xaj+nfLDq0DZKGMxH0/rmX7LZbCZXyE0/Wpm6WjHpPR106bf/ZYZgeRjkPrvZWWNtvaH2vTfkpNBj9fZzOzi9LMw+MFZd/1gYhuVVHfqKvW+RfVUxOhbFZFnWwYu9uNihSIt9QIe2N+XzpRvPY2h9849xJulsdjJXGJ9dnDtfls2fnoHHjb7xl7aLS5Dr66tjuO8N9TNxsU/Ca3V86+kKqllev2NqbL3R6DhHHqyR8osUrGft3zRWO6hNiOnNq2O83Z0SWSnlhWWRTaq9Wo2k9c24X9LZzGRhcvy/FxfOl3GZdPAqUlT19a5zo+uu/0LLXkfa28Kq0FqeOMbnvdtFR1ohePjPyl6nQxFcOdemN9brVqvHbmjaOlAiavDYTbNZTT7zkUnh5E7gNZT/TI9HShpMs4Cm6b+MeL/PelOYw0v55lrFHtqRWHnTFTqv/cUUlKKsED7jq8GvWcrBm1dHvSenkBx6ZYc3EbM7tKGBTlgEJn2Ml0mk5Vesf0SzctVsPFDuKqsdjqrEL6PvSgtLwt4SFi3/qVG3b6QSZYUcltN2g/kOKNTJ4637YkGrdmyF5g1ZbSai46FYYq/7Nx7ECiT7yA9L7zvxDISLaCpwqd3gQa7o7wGWTisu0UkcWmGUH61UxHnDPLb93Sfk1dnhF98791PstY4jxkMYCCvIJNxliG6+4qP1zb/EWKELawVLt6LqOPPqBpuaore+c0RsZX+7uR22m2Rc31+0FWIFVwy0YDhUTp9OkNvk1RHrzgJSewpvUxaD+KKxkUyGJwgpLXTzleftkhueBt17SCan6Oyhh0uznfNgRRO41mLs4F32d8l2YmFFW2GCdZQ2BA9vTeyRO3u3J1rKRavXOnqjSEpjp2v5VCsPwepYMtmMZDVG56U35WbK4DXmSxVrvFBNur1pTHZZJpJfJRbeISm/odpRRz9qTOpH4BVK/Vc7eixMsIHHTWXy65b1xdHefWwXvlBOXh9ISn2j3WYzh+C1eHhbahdT1eRqXL3dcfPJDZ4oXqZY6Rlet/VmLzTmSfMdUicUmxq9HuVdAni5rEJsUkwVvd/iYEcvWGHAdYnz92OgQi9Ozi4OW08mwPqscrNNu+CNjiUMiCmaD4abQny0aJ/kDTzNb/5xmWJlF9kEcVLwRX0aMBYbpEtnPYvl6Pbud4G1W3Z/CmetszHmhlksIo2sz8piKl3CadbT09oXOCetAqkST6ZZDbBPNQWbSgf3ScI2Y27jaVyM5UnuXOPz6cKKC7r0KlUmkFIUixg7RCZFdHn08DeM8p34btn5PSr+uzhN+pMT3Ar9sPgDv9NqKNaDxy8sy+60IT3kqFKl/TWmWnWs9gityLGSMp5XeUvzZagAFnXtFJar/aBaEDGWbOtmmSidfHE76q6XCMtkbW1DsXIDeL4ku4/1DFwU5vzqUgO+KcWsUNQqlxt1WuKaAQVJ3bQ6Y+w+Yrhsp+uuyMR74qbaf61uXtLbPeY0y3/z35eySl+nVxwXbCWFo8PooaQQrAfUi77YwQcLb7amDXkDQE3QFFdvdJ2WiXb5bwptr7KxUBZSfNmtsu2Ka8IweCjul8la3eJdR+DN65LymK/KtJrDrRrAZRio05c7rPHxzEICb9erJ/zrI23wDljCVAlp0xsyR8FCAmCDiaFUS7gBtRwsC8luW4rqzFS4PGV31oKuNlz37NCyOh1rva9YRnNrw4DxfxvD+lrrgq8JWx1qPQqXb/7P5azGc8vBwCHBFgGDQjWbRrtPOvn8KgyHtMfIPyhyDEPdtNTU/bA8YJ5zkql+eTMVHieZ39tOvMMYjId2yiLtm3X7Zt/eb68r1ptaz+3uBtkYflXYUKzS150JXz8sOK7VPAzp+U4H9wWBFo8vAJnbj8MoYNfkMJoVMkM5AAv/3bV3nYfCX2eTfh0CDoNLW4Xg02hY9g4prVprfesC0uoWyKmz5NfqeFmyES+lYh5tMFu4TG5N8bhBpEVv58gHHhoDQezgMHWRsQCe3kZ/uKU7l8Fi/3oxiua0ThKdVrt1EiGW8M+WK+xFRZEa7krWqA9T2VLseud/chBCXf7zRfQDEraXVkRW2EjtLRYp1tVkQBI0zKKohgwdfLDcvw678MySB4vosbAGiQW6/9kYC7jswZtKc4XM4gi7lmQ/rL5TnMsXi8aaWvWzqtAfoKkMZ4FMdDnk2AOaJi42lxHW+RQKHJzMYF2dcl4gy+xhwjn88+BbJiFIPPEcIge8SwmvZ6QAAAzZSURBVOSyt/3ClCjnVXxNnln09iIKvul74SrdhxM18mOmq0XyxbHmWqNeLveTfAmZF+1reJOBIW4pmWBmGjEKCg+Dk3IwQhJyrZDJZArz7ErC8+v4PJfGg53Dh5lbyw6s6Zz/rcIiPyGp3zSwmyKNG9yiYG5lBJnMFTKPkrAxfA37Qt+7BfzATM63/cwcvuizAhtrgJ06W7VMNauCqw1kNyTT+LqUy+yQr930YAXMMFIorFk6RBWm6HnD80dZfD5DiWToWy6sa+mIt9jaCKlfJmSFvUhhFYLDXLYwx/YyGxoTs/RK+F9OZybPA7Tkcn1d5Xf5kgPJI/1rsrsjXnoffX4/ER+sIea+NffY8bzNUWGlp93zgU/KDFAMLHhjIQZWJgIWbj/nWSIVXAvZl+ldvoK5owMLJfgrOCFh97jzLXIapk/AgzWegdPVRoQ1nltAxCgwis1mQ7DSkygZ/hUFU4CV9mRSgIXPHVq3HMXlZ7Rb5kvguWJxo3M3GXZuh91P5PJWsHhYaYSgjQhrvKAx1cKRgiuTACs9S735wizbenJKgDXryTUB1jTITIFhR8UVVMuby5d9QZYbkA3JymT3E3kXWOPZ65TIaLDwQ3g+8JJrPR6srBMqzNOdZuY8WDMkINPCy+ZKbtz5auFo3RFdrvhgOb5rSFj85iv+xssRYY3nVkaHNV64CvqYMB3vHgPram4kWIQsMroLMbAiItLhYfEbAmreXqPhRASlgr8tnI8Oi1pvwvXuMbCmMg7YIWFV2efn/eNhwg+r4qoYrUAPO13Bbwh4Caywz/fDolxGhDU+ySKC69l4WImprMvVhVVddkSOgCVHw2KnJnuhlZ7wVGvYAim/IaC3YOPtYI1ntZFhjRfwZK96oUJoNISIlD4uJAVY4zlHbi1EwGJ2m10JwXLPw33iBfBDwuJ3qtEjdhbS4UhYM+74M1KcRc9oFp7Th+kQLEHS13jaFIyzMlGw2DMcPn2HH3V+I8Pid6qJIj8UrPT1KXZ2mcXF4WGlr8/QDc7Z08mFQRH8+PjKMLCSy8vV5Sl+7QoJIXRwDz5wFiPDcrMdb89xrGTxHtkurFnyiBlWlp3KULCyizy2oh4GXFIhZIZZJozKjBiUZh0piLDGsaaV41EsujwzcAIJGr4Ld671zHDYmDQEK0LcGEWQhAeLXHNdtB9WDmDhzjmstAiLv5TlUIOw0tPzVB6xLbLXBFjXHZmFMViKSnfSaXjZPVThh3AqYijqPRk6gK/i34ExKb8sFSdLoDfbkgVY0rhwuJTI1CQ+RMehmRocOH0/fU2EVXHNLfuIhGC5oQP3hDR2iAodomBlZuDoZOFoA2GWLFghzRKHhpWMgeXZN3tQScbCIknBz8wIQxKeMSpWVQDgwPJi0Zw2CFbFDQWGhYUjIdGEg8VuGe51edyuu4o10lryuNRQ9sFyr0OkGfrGf3ouEi8jsCGfh1IswXNhOVkOptSXw3oUA8vzWelsmuHPYNFIdBnePGLCieDd2l9iBFjBbEeAJU5JsOtQTfgOUoBF5go+WE6kmUbrMRcnGbqEHxYjzDxZPCw2xtLnl0bwCX6N5OAmmuPV9cjccEhY+pVEPCxhhR5+SVXyH4EIyxkSnXNxVC2XvTbNKwFUOURYjCgbMoOhQ/raHMrKPA8FaJQQLtFQVybEWVP8w0FYXsHGT6vCC5DDSSDbiQTmLPwyA9/vg+UOifzCu0mMW2Qq6EFYesFFOBmANZ5mZWJnL1jQiSj+5QKw+Nfm5sK0vNPycPFYaPhsh44EMfe25bYo0zJQJfj1flhSWoizQGay/vO6dZUEYZGFW4VbWjSswIfP3S8cDEtiCu44S0F85U0eUnAZMdthv66sh2F5Y25VC369H5YzJDqwpNmCcG6ZrBOgirA8GQQrPZm96n3hYFi8kJgOObbIVHFEWKH7clJqLjYRlhT89msFSGYLnn84v4XP097zmUImm02ns5lcbsX99Bzd6lFgX7doYlx1H7oCUfnslPiFPqEaN1MQv/cR3ehWeJ4xvv40NKz4+3IiNtmNfpPJEKzlqyjLwRfELRYWr89efzQnvpYMfooKffGq6T10ZFkY2ZavhkT2PsA3ktiz8zCsSjLYNTIirPibmOLPJZu67vz4cqUSgvUrE8gLnRsaBWT4bCeuh4D+vDQuymdP6SzMr1qoDb4brCub+AuScsQPMWuUlSMJ+dcOiw2DUT/TMSQrSa66vyBJfw5R1mMM+J8CVowZDguLiakB8qrzc4iRN9v/J4CF5XeBlVcIHA2WJxrsshoV/v/6YQV+ZMerFIy4FGUI+fXDSlbESq/sVQrey68l/9PBwiqgD1bi/cIynVUHHxCWlKwGikGDRa9WwxFzWGhdKymHzfC9wZIhHBVhnc9MO3J9jofhCe+12XknkJ7yXqQCL817z66veEH9nPM+O6WVGdpOm17EvU+Nz/glC6kgyoqz/fIinakozKy4ufMj3EAW9057MRKOJgVYvTdYZsWUmGpxWFM5t5aUzRSmWQ9jwSswZXNZlskt5NKiYG/QYkbcLuec7zy+nHWeFJwuo2xhNkEWJgOZc4EQ/Hhmnl+nWV4sG09nC046OIv56Iywdzo/GZrNd3PF96hZPljmVEY89DTWXaSkv05AD1pa8G2ILXrSor9owwsREu2TYWmwPiN+KptbDuwFdi5J9C0Ga7kg7jIzTtVJosUJ3tlD956OguX9feufdA/BSvhgSQxW1i3LFWQHFn3Na5xkpyk2f3JYdMaPzfbQIqkIi9XA0pnJSdYKM71Au0j5XCBtU5WIB2u5wN/gTW/prObCGs/ND4Ylv39YJgwgUhBWdm5hYW6RHiD2p1NY2UV4bYWdbcaBlRHbijmsFZD5mRw7OT8sVprOTc+dn6+ks+OZWfPqChaXH9Fvog/nRFhs5r/waOp84Tq7YLMeLHrNYmGJk+zvixXikkKwCtTnV9ghcViZKczI2Sxf4SqHVXD2QS8yhTXDpl2v0hPNrIiwmKLAOUqmKZmLtx4RjSo1YfvC2BFn1lxYrBFgporbk6tua5IDi1b3Y2EJU33vEZYUAQsHdl2iB1uQGSw6z2VqVVSZzIIDiwjiwMKHulSlrjsrwqIPcmxKXtOlKfeDbF9sCsCDRR+M5yp8h3SKhLYTugXVTGIALE8+ACzu7AtJDotW2zTau5CZ4yeYc4t0fliIeoVP7biwpJlxoR4sedMjMbCoImadMVVnReeCCAt2NgSs95/tRMBimlBIiLDYVDRoGXfwTm34WhAW0ZadLR1Yck48eVElo2HRFoGcU3KV+FZJDov1NF0nvzwsGnItsFZXIsJaZp1E1UDokL4ehlVxdJDDkqrc9Q0Ji7/qhvraeY7Bo7DS19mQuLJyKaz3nxr6YKWvXbs2PclUZ84JHabhxXSOXtRpN3TgIWhmNgSLDwsLHiznhdFguSV66XxSgJWdZ9O8menxXxiW15+fnfaCUrdnHyft2Kmkneag+TAsZrDnHiwdTzY0RxYLS2Nw3LSJjzcVDmtR6Cj4ZWE5B5GbNkMRfJq6EX/owM7GB4sHGUkPlkTn/7IkJDGwqNlmvTk15+McluR1FDBY4YnRDwMry6Jytv7Ki+C9NslLQgfCJ0Nx7PNgBaZfHzmVhBhYDG7BUa0V59PcDGHAdToKGCx2HuHp5PcWwEfDYsH0FB+IeAQ/PzW1SMOFqSFgJVacANQbDXXWXJR7RKksT0/OyINgSeaUuw9kVXA9AIelaTJvshNhecKo6T83LIjgTcmtIAkRPLvWCfcEs4uOPKo66Q6MA9f4Ehva/OjC0qQ51gKXuz4/P11IQzZUHQALIiumOZPjiyuPMlTjJ+eJB4toJk8eo2H9jBIRZ/lgQcRkcjcy656g0Cu77MDyFm9lZyQRFtjNdVaRSfNMOzM9CJakybz5xO3TZVAcWLBD3vnwoWHpl8E6x4OjsRdmLMESTW45WKJJF4QiCoVl6tKi2EySuzbIDNFjV6Zzwh55A4UHC1Oy3C8BS+OwCnAZbwVg3ULVmaIHNzuJ78MYt1DIinILYD3KuU8zucIs98zSPLycoassTZ2cz+SyrI150m2ykubolzqwspksL/TpYLkZZ/vcOG9vkK5NOhtIOsEvnbz2gWFJdPpeuzo/P78y72trkyrYg72C7t7UkvhwZYFtKEoScknv2dy5G0xqU/QjbFe6KV2dvzaeHZ9+NOV+iXZOv5QHIBL9NgYGdFGbWpyG7a/Nu50g0py3AewQnyx8aFimxK6lFJwbYGtl2WPdeRyc2MaXTP9zLgnfLiX6Qc0Uv8T3pZLu+zj9pRJJ8+3BFDbQdPfJzw0odMIfQkb9qmG3/6eE9TPJh2X1K6f1oWH9mml9cFa/Xly/BKqP8lE+ykf54PL/AIU2DfeCfAIfAAAAAElFTkSuQmCC'
+                },
+            ];
 
+            const projectsContainer = document.getElementById('projects');
+
+            projects.forEach(project => {
+                const projectRow = document.createElement('div');
+                projectRow.classList.add('project-row');
+
+                const projectItem = document.createElement('div');
+                projectItem.classList.add('project-item');
+
+                projectItem.innerHTML = `
+                    <h2 class="project-title">${project.title}</h2>
+                    <img src="${project.imageUrl}" alt="${project.title}">
+                `;
+
+                const projectDescription = document.createElement('div');
+                projectDescription.classList.add('project-description');
+
+                projectDescription.innerHTML = `
+                    <p>${project.description}</p>
+                `;
+
+                projectRow.appendChild(projectItem);
+                projectRow.appendChild(projectDescription);
+                projectsContainer.appendChild(projectRow);
+            });
+        });
+    </script>
+</body>
 </html>
