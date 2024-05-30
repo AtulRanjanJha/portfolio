@@ -24,7 +24,6 @@
       --text-color: black; /* Text color in dark mode */
       --icon-color: var(--text-color); /* Icon color in dark mode */
     }
-    
 
     /* Container for the content */
     .container {
@@ -39,24 +38,23 @@
       color: var(--icon-color);
     }
     .btn {
-            position: fixed;
-            top: 15px;
-            left: 20px;
-            width: 20px;
-            height: 20px;
-            border-radius: 190px;
-            padding: 0.5em;
-            background-color: #aaa6a6;
-            color:rgb(178, 180, 138);
-            box-shadow: inset 0 8px 60px rgba(0, 0, 0, .1),
-                        inset 0 8px 8px rgba(0, 0, 0, .1),
-                        inset 0 -4px 4px rgba(0, 0, 0, .1);
-            z-index: 999;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-
+      position: fixed;
+      top: 15px;
+      left: 20px;
+      width: 20px;
+      height: 20px;
+      border-radius: 190px;
+      padding: 0.5em;
+      background-color: #aaa6a6;
+      color: rgb(178, 180, 138);
+      box-shadow: inset 0 8px 60px rgba(0, 0, 0, .1),
+                  inset 0 8px 8px rgba(0, 0, 0, .1),
+                  inset 0 -4px 4px rgba(0, 0, 0, .1);
+      z-index: 999;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
 
     .btn__indicator {
       width: 10px;
@@ -87,7 +85,7 @@
     }
 
     .btn__icon.animated {
-    animation: spin 0.5s;
+      animation: spin 0.5s;
     }
     @keyframes spin {
       to {
@@ -134,19 +132,40 @@
         opacity: 1;
       }
     }
+
+    /* New button styles */
     .resume-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 999;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+      width: 165px;
+      height: 62px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 17px;
+      border-radius: 1rem;
+      border: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: black;
+      transition: 0.1s;
+    }
+
+    .resume-button::after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(255,94,247,1) 17.8%, rgba(2,245,255,1) 100.2%);
+      filter: blur(15px);
+      z-index: -1;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .resume-button:active {
+      transform: scale(0.9) rotate(3deg);
+      background: radial-gradient(circle farthest-corner at 10% 20%, rgba(255,94,247,1) 17.8%, rgba(2,245,255,1) 100.2%);
+      transition: 0.5s;
+    }
   </style>
 </head>
 <body>
